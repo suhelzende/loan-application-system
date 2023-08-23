@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+
 	"github.com/suhelz/loan-processing-system/controller"
 	"github.com/suhelz/loan-processing-system/model"
 	"github.com/suhelz/loan-processing-system/repository"
@@ -11,7 +12,11 @@ import (
 
 func main() {
 	// read config
-	cfg := model.Config{}
+	cfg := model.Config{
+		Service: model.Service{
+			Port: 8090,
+		},
+	}
 
 	// create repository
 	// TODO: pass actual config
@@ -19,12 +24,15 @@ func main() {
 
 	loanService := service.CreateNewApplicationService(loanRepository)
 
-	applicationController := controller.CreateNewController(loanService)
+	applicationController := controller.NewApplicationController(loanService)
 
-	router := router.CreateApplicationRouter(cfg, applicationController)
+	router := router.NewRouter(cfg)
 
-	err := router.run()
+	// Adding Loan Application controller
+	router.AddLoanApplicationController(applicationController)
+
+	err := router.Run()
 	if err != nil {
-		log.Fatal("Failedd to start the server: ",err.Error())
+		log.Fatal(err)
 	}
 }

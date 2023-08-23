@@ -17,7 +17,7 @@ type LoanApplicationService struct {
 
 func (las LoanApplicationService) StartNewApplication(request model.LoanApplicationRequest) (*model.LoanApplication, error) {
 	// TODO: Implement this function
-	return nil, nil
+	return las.repository.StartNewApplication(request)
 }
 
 func (las LoanApplicationService) SubmitApplication(request model.LoanApplication) (*model.LoanApplication, error) {
