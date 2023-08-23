@@ -1,6 +1,7 @@
 package apiconstants
 
 const (
+	// Application
 	EndpointLoanApplicationControllerGroup = "/application"
 
 	EndpointStartLoanApplication = "/start"
@@ -10,4 +11,11 @@ const (
 	EndpointGetLoanApplicationByID = "/id/:applicationID"
 
 	PathParamApplicationID = "applicationID"
+
+	// Accounting
+	EndpointAccountingControllerGroup = "/accounting"
+
+	EndpointGetAllAccountingProviders = "/providers"
+
+	EndpointRequestBalenceSheet = "/balencesheet/request"
 )

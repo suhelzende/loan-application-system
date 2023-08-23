@@ -1,6 +1,10 @@
 package repository
 
-import "github.com/suhelz/loan-processing-system/model"
+import (
+	dicisionengine "github.com/suhelz/loan-processing-system/dicision-engine"
+	"github.com/suhelz/loan-processing-system/model"
+	"github.com/suhelz/loan-processing-system/storage"
+)
 
 func CreateNewApplicationRepository(config model.Config) LoanApplicationRepositoryInterface {
 	return LoanApplicationRepository{}
@@ -9,21 +13,21 @@ func CreateNewApplicationRepository(config model.Config) LoanApplicationReposito
 type LoanApplicationRepository struct {
 }
 
-func (lap LoanApplicationRepository) StartNewApplication(request model.LoanApplicationRequest) (*model.LoanApplication, error) {
-	// TODO: Implement this function
-	return &model.LoanApplication{
-		ID:        "APPLICATIONID2023",
-		Requester: request.BorroweDetails,
-		Status:    "PENDING",
-	}, nil
+func (lap LoanApplicationRepository) StartNewApplication(application *model.LoanApplication) (*model.LoanApplication, error) {
+	newApplication := storage.CreateNewLoanApplication(application)
+	return newApplication, nil
 }
 
-func (lap LoanApplicationRepository) SubmitApplication(request model.LoanApplication) (*model.LoanApplication, error) {
-	// TODO: Implement this function
-	return nil, nil
+func (lap LoanApplicationRepository) UpdateApplication(application *model.LoanApplication) error {
+	return storage.UpdateLoanApplication(application)
+}
+
+func (lap LoanApplicationRepository) SubmitApplication(businessDetails model.BusinessDetails, profitLossSummary []model.ProfitLossSummary, preAssessmentScore int) (string, error) {
+	dicisionEngineRequest := model.NewDicisionEngineRequest(businessDetails, profitLossSummary, preAssessmentScore)
+	return dicisionengine.SubmitApplication(dicisionEngineRequest)
 }
 
 func (lap LoanApplicationRepository) GetApplicationByID(loanID string) (*model.LoanApplication, error) {
-	// TODO: Implement this function
-	return nil, nil
+	application := storage.GetApplicationByID(loanID)
+	return application, nil
 }

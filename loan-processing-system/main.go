@@ -8,6 +8,7 @@ import (
 	"github.com/suhelz/loan-processing-system/repository"
 	"github.com/suhelz/loan-processing-system/router"
 	"github.com/suhelz/loan-processing-system/service"
+	"github.com/suhelz/loan-processing-system/storage"
 )
 
 func main() {
@@ -18,18 +19,25 @@ func main() {
 		},
 	}
 
+	// initialize inmemory storage for Application
+	// in actual system it will have db connection here
+	storage.InitStorage()
+
 	// create repository
-	// TODO: pass actual config
-	loanRepository := repository.CreateNewApplicationRepository(cfg)
+	applicationRepository := repository.CreateNewApplicationRepository(cfg)
+	applicationService := service.CreateNewApplicationService(applicationRepository)
+	applicationController := controller.NewApplicationController(applicationService)
 
-	loanService := service.CreateNewApplicationService(loanRepository)
-
-	applicationController := controller.NewApplicationController(loanService)
+	accountingProviderRepository := repository.CreateNewAccountingProviderRepository(cfg)
+	accountingProviderService := service.CreateNewAccountingProviderService(accountingProviderRepository)
+	accountingProvideController := controller.NewAccountingProviderController(accountingProviderService)
 
 	router := router.NewRouter(cfg)
-
 	// Adding Loan Application controller
 	router.AddLoanApplicationController(applicationController)
+
+	// Adding Accounting Provider controller
+	router.AddAccountingProviderController(accountingProvideController)
 
 	err := router.Run()
 	if err != nil {

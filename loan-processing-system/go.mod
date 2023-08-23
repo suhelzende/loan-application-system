@@ -2,7 +2,10 @@ module github.com/suhelz/loan-processing-system
 
 go 1.20
 
-require github.com/gin-gonic/gin v1.9.1
+require (
+	github.com/gin-gonic/gin v1.9.1
+	github.com/google/uuid v1.3.1
+)
 
 require (
 	github.com/bytedance/sonic v1.10.0 // indirect

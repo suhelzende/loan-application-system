@@ -1,31 +1,17 @@
 package service
 
-import (
-	"github.com/suhelz/loan-processing-system/model"
-	"github.com/suhelz/loan-processing-system/repository"
-)
+import "github.com/suhelz/loan-processing-system/model"
 
-func CreateNewApplicationService(loanApplicationRepository repository.LoanApplicationRepositoryInterface) LoanApplicationServiceInterface {
-	return LoanApplicationService{
-		repository: loanApplicationRepository,
-	}
+type LoanApplicationServiceInterface interface {
+	StartNewApplication(request model.LoanApplicationRequest) (*model.LoanApplication, error)
+
+	SubmitApplication(request model.SubmitLoanApplicationRequest) (model.LoanApplication, error)
+
+	GetApplicationByID(loanID string) (*model.LoanApplication, error)
 }
 
-type LoanApplicationService struct {
-	repository repository.LoanApplicationRepositoryInterface
-}
+type AccountProviderServiceInterface interface {
+	GetAllAccountingProviders() ([]*model.AccountingProvider, error)
 
-func (las LoanApplicationService) StartNewApplication(request model.LoanApplicationRequest) (*model.LoanApplication, error) {
-	// TODO: Implement this function
-	return las.repository.StartNewApplication(request)
-}
-
-func (las LoanApplicationService) SubmitApplication(request model.LoanApplication) (*model.LoanApplication, error) {
-	// TODO: Implement this function
-	return nil, nil
-}
-
-func (las LoanApplicationService) GetApplicationByID(loanID string) (*model.LoanApplication, error) {
-	// TODO: Implement this function
-	return nil, nil
+	GetBalenceSheet(businessDetails model.BusinessDetails, accountingProvider model.AccountingProvider) (*model.BalenceSheet, error)
 }
