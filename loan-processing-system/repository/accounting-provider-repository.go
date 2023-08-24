@@ -6,7 +6,7 @@ import (
 	"github.com/suhelz/loan-processing-system/storage"
 )
 
-func CreateNewAccountingProviderRepository(config model.Config) AccountingProviderServiceInterface {
+func CreateNewAccountingProviderRepository() AccountingProviderServiceInterface {
 	return AccountingProvider{}
 }
 

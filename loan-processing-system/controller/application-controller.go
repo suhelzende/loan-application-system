@@ -27,7 +27,6 @@ func (controller ApplicationController) StartLoanApplication(ctx *gin.Context) {
 
 	err := ctx.Bind(&loanApplicationRequest)
 	if err != nil {
-		// TODO: return custom message instead of nil
 		log.Println(err.Error())
 		ctx.JSON(http.StatusBadRequest, nil)
 		return
@@ -35,7 +34,6 @@ func (controller ApplicationController) StartLoanApplication(ctx *gin.Context) {
 
 	err = validateLoanApplicationRequest(loanApplicationRequest)
 	if err != nil {
-		// TODO: return custom message instead of nil
 		log.Println(err.Error())
 		ctx.JSON(http.StatusBadRequest, nil)
 		return
@@ -43,14 +41,12 @@ func (controller ApplicationController) StartLoanApplication(ctx *gin.Context) {
 
 	loanApplication, err := controller.loanApplicationService.StartNewApplication(loanApplicationRequest)
 	if err != nil {
-		// TODO: return custom message instead of nil
 		log.Println(err.Error())
 		ctx.JSON(http.StatusInternalServerError, nil)
 		return
 	}
 
 	if loanApplication == nil {
-		// TODO: return custom message instead of nil
 		log.Println("Unable to start application")
 		ctx.JSON(http.StatusInternalServerError, nil)
 		return

@@ -18,4 +18,6 @@ const (
 	EndpointGetAllAccountingProviders = "/providers"
 
 	EndpointRequestBalenceSheet = "/balencesheet/request"
+
+	DefaultPort = 8090
 )

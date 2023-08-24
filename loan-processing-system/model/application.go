@@ -19,8 +19,8 @@ type BusinessDetails struct {
 }
 
 type Borrower struct {
-	Name  string
-	Email string
+	Name  string `json:"name"`
+	Email string `json:"email"`
 }
 
 type DicisionEngineRequest struct {

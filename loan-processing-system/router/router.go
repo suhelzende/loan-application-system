@@ -6,7 +6,6 @@ import (
 
 	"github.com/gin-gonic/gin"
 	apiconstants "github.com/suhelz/loan-processing-system/constants/api-constants"
-	"github.com/suhelz/loan-processing-system/model"
 )
 
 type Router struct {
@@ -14,7 +13,7 @@ type Router struct {
 	router   *gin.Engine
 }
 
-func NewRouter(config model.Config) *Router {
+func NewRouter() *Router {
 	r := gin.New()
 
 	r.GET("/", func(ctx *gin.Context) {
@@ -23,18 +22,23 @@ func NewRouter(config model.Config) *Router {
 		})
 	})
 
-	r.Use(func(ctx *gin.Context) {
-		ctx.Writer.Header().Set(apiconstants.AccessControlHeaderKey, apiconstants.AccessControlHeaderValue)
-		ctx.Writer.Header().Set(apiconstants.AccessControlMethodKey, apiconstants.AccessControlHeaderValue)
-		// Handle CORS
-		if ctx.Request.Method == http.MethodOptions {
-			ctx.AbortWithStatus(http.StatusOK)
-		} else {
-			ctx.Next()
-		}
-	})
+	r.Use(func() gin.HandlerFunc {
+		return func(ctx *gin.Context) {
+			ctx.Writer.Header().Set(apiconstants.AccessControlHeaderKey, apiconstants.AccessControlHeaderValue)
+			ctx.Writer.Header().Set(apiconstants.AccessControlMethodKey, apiconstants.AccessControlHeaderValue)
+			ctx.Writer.Header().Set(apiconstants.AccessControlAllowedHeaderKey, apiconstants.AccessControlHeaderValue)
+			fmt.Println(ctx.Writer.Header())
 
-	endpoint := fmt.Sprintf(":%d", config.Service.Port)
+			// Handle CORS
+			if ctx.Request.Method == http.MethodOptions {
+				ctx.AbortWithStatus(http.StatusOK)
+			} else {
+				ctx.Next()
+			}
+		}
+	}())
+
+	endpoint := fmt.Sprintf(":%d", apiconstants.DefaultPort)
 	return &Router{
 		Endpoint: endpoint,
 		router:   r,

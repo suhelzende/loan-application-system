@@ -4,7 +4,6 @@ import (
 	"log"
 
 	"github.com/suhelz/loan-processing-system/controller"
-	"github.com/suhelz/loan-processing-system/model"
 	"github.com/suhelz/loan-processing-system/repository"
 	"github.com/suhelz/loan-processing-system/router"
 	"github.com/suhelz/loan-processing-system/service"
@@ -12,27 +11,22 @@ import (
 )
 
 func main() {
-	// read config
-	cfg := model.Config{
-		Service: model.Service{
-			Port: 8090,
-		},
-	}
 
 	// initialize inmemory storage for Application
 	// in actual system it will have db connection here
 	storage.InitStorage()
 
-	// create repository
-	applicationRepository := repository.CreateNewApplicationRepository(cfg)
+	// loan application dependancies
+	applicationRepository := repository.CreateNewApplicationRepository()
 	applicationService := service.CreateNewApplicationService(applicationRepository)
 	applicationController := controller.NewApplicationController(applicationService)
 
-	accountingProviderRepository := repository.CreateNewAccountingProviderRepository(cfg)
+	// accounting provider dependancies
+	accountingProviderRepository := repository.CreateNewAccountingProviderRepository()
 	accountingProviderService := service.CreateNewAccountingProviderService(accountingProviderRepository)
 	accountingProvideController := controller.NewAccountingProviderController(accountingProviderService)
 
-	router := router.NewRouter(cfg)
+	router := router.NewRouter()
 	// Adding Loan Application controller
 	router.AddLoanApplicationController(applicationController)
 

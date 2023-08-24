@@ -6,7 +6,7 @@ import (
 	"github.com/suhelz/loan-processing-system/storage"
 )
 
-func CreateNewApplicationRepository(config model.Config) LoanApplicationRepositoryInterface {
+func CreateNewApplicationRepository() LoanApplicationRepositoryInterface {
 	return LoanApplicationRepository{}
 }
 
