@@ -28,7 +28,7 @@ func (las LoanApplicationService) StartNewApplication(request model.LoanApplicat
 func (las LoanApplicationService) SubmitApplication(request model.SubmitLoanApplicationRequest) (model.LoanApplication, error) {
 	loanApplication := request.LoanDetails
 	preAssessmentScore := preAssessment(request)
-	profitLossSummaryByYear := profitLossSummaryByYear(request.BalenceSheet.Sheet)
+	profitLossSummaryByYear := profitLossSummaryByYear(request.BalanceSheet.Sheet)
 	status, err := las.repository.SubmitApplication(*request.LoanDetails.BusinessDetails, profitLossSummaryByYear, preAssessmentScore)
 	if err != nil {
 		return loanApplication, err
@@ -48,7 +48,7 @@ func preAssessment(request model.SubmitLoanApplicationRequest) int {
 
 	profitOrLoss := 0
 	totalAssetCountFor12Monht := 0
-	for _, balance := range request.BalenceSheet.Sheet {
+	for _, balance := range request.BalanceSheet.Sheet {
 		profitOrLoss += balance.ProfitOrLoss
 		totalAssetCountFor12Monht += balance.AssetsValue
 	}
@@ -56,7 +56,7 @@ func preAssessment(request model.SubmitLoanApplicationRequest) int {
 	if profitOrLoss > 0 {
 		score = appconstants.PreAssessmentScoreProfit
 	}
-	averageAssetCount := totalAssetCountFor12Monht / len(request.BalenceSheet.Sheet)
+	averageAssetCount := totalAssetCountFor12Monht / len(request.BalanceSheet.Sheet)
 
 	if averageAssetCount > request.LoanDetails.LoanAmount {
 		score = appconstants.PreAssessmentScoreAsset

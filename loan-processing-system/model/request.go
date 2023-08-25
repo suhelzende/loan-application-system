@@ -14,7 +14,7 @@ type BalenceSheetRequest struct {
 
 type SubmitLoanApplicationRequest struct {
 	LoanDetails  LoanApplication `json:"loanDetails"`
-	BalenceSheet BalenceSheet    `json:"balenceSheet"`
+	BalanceSheet BalenceSheet    `json:"balanceSheet"`
 }
 
 type ProfitLossSummary struct {

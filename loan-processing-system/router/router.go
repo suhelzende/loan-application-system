@@ -27,7 +27,6 @@ func NewRouter() *Router {
 			ctx.Writer.Header().Set(apiconstants.AccessControlHeaderKey, apiconstants.AccessControlHeaderValue)
 			ctx.Writer.Header().Set(apiconstants.AccessControlMethodKey, apiconstants.AccessControlHeaderValue)
 			ctx.Writer.Header().Set(apiconstants.AccessControlAllowedHeaderKey, apiconstants.AccessControlHeaderValue)
-			fmt.Println(ctx.Writer.Header())
 
 			// Handle CORS
 			if ctx.Request.Method == http.MethodOptions {

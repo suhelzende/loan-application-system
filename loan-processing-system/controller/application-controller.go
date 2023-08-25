@@ -129,7 +129,7 @@ func validateSubmitLoanApplicationRequest(loanApplicationRequest model.SubmitLoa
 		return err
 	}
 
-	if len(loanApplicationRequest.BalenceSheet.Sheet) == 0 {
+	if len(loanApplicationRequest.BalanceSheet.Sheet) == 0 {
 		return errors.New("missing balence sheet")
 	}
 
