@@ -6,7 +6,6 @@ $(function () {
     crossDomain: true,
     timeout: 1500,
     success: function (provider) {
-      console.log(JSON.stringify(provider));
       providerOptions = provider
         .map((p) => `<option value="${p.ID}">${p.Name}</option>`)
         .join("");
@@ -24,13 +23,9 @@ $(function () {
   $("#start-application").submit(function (e) {
     e.preventDefault(); //prevent the default action
 
-    console.log("submitted");
     var usrname = $("#name").val();
     var usreamil = $("#email").val();
-    console.log(usrname);
-    console.log(usreamil);
     var currentDate = new Date();
-    console.log(currentDate);
 
     loanApplication = {
       date: currentDate,
@@ -39,7 +34,6 @@ $(function () {
         email: usreamil,
       },
     };
-    console.log(loanApplication);
 
     $.ajax({
       type: "POST",
@@ -49,8 +43,8 @@ $(function () {
       data: JSON.stringify(loanApplication),
       timeout: 1500,
       success: function (application) {
-        console.log(JSON.stringify(application));
         loanApplication = application;
+        $("#business").removeClass("hidden");
       },
       dataType: "json",
       error: function () {
@@ -76,10 +70,6 @@ $(function () {
       var businessID = $("#regId").val();
       var eYear = Number($("#eYear").val());
       var amount = Number($("#amount").val());
-      console.log(businessID);
-      console.log(businessName);
-      console.log(eYear);
-      console.log(amount);
 
       if (businessID == "" || businessName == "" || eYear == 0 || amount == 0) {
         alert("Please fill business details");
@@ -113,7 +103,6 @@ $(function () {
             }),
             timeout: 1500,
             success: function (sheet) {
-              console.log(JSON.stringify(sheet));
               loanDetails.balanceSheet = sheet;
               balancesheet = sheet.Sheet.map(
                 (s) =>
@@ -130,7 +119,7 @@ $(function () {
             },
             dataType: "json",
             error: function () {
-              alert("error");
+              alert("Failed to get data");
             },
           });
         }
@@ -139,8 +128,7 @@ $(function () {
   });
 
   $("#submit-application").submit(function (e) {
-    e.preventDefault(); //prevent the default action
-    console.log(loanDetails);
+    e.preventDefault();
 
     $.ajax({
       type: "POST",
@@ -150,32 +138,38 @@ $(function () {
       data: JSON.stringify(loanDetails),
       timeout: 1500,
       success: function (application) {
-        console.log(JSON.stringify(application));
         loanApplication = application;
 
-        outcome = `
-        <div class="jumbotron jumbotron-fluid ">
-          <div class="container">
-            <h1 class="display-4">Rejected</h1>
-            <p class="lead">Application has been rejected</p>
-          </div>
-        </div>
-        `;
+        var status = "REJECTED";
         if ((application.Status = "ACCEPTED")) {
-          outcome = `
-          <div class="jumbotron jumbotron-fluid" style="background:green;color:white">
-            <div class="container" >
-              <h1 class="display-4">Accpeted</h1>
-              <p class="lead">Application has been accepeted.</p>
-            </div>
-          </div>
-        `;
+          status = "ACCEPTED";
         }
+
+        outcome = ` 
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">  ${status}</h4>
+              </div>
+              <div class="modal-body"> 
+                <p>ApplicationID: ${loanApplication.ID}</p>
+                <p>Business: ${loanApplication.BusinessDetails.Name}</p>
+                <p>Loan Amount: ${loanApplication.LoanAmount}$</p>
+                <p>Initiated Date: ${loanApplication.DateInitiated}.</p> 
+                <p>Borrower : ${loanApplication.Borrower.name}</p>
+                <p>Please keep this details for future reference</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" id="closing" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div> 
+        `;
         document.getElementById("outcome").innerHTML = outcome;
+        $("#result").modal();
       },
       dataType: "json",
       error: function () {
-        alert("error");
+        alert("API failed");
       },
     });
   });
@@ -185,5 +179,9 @@ $(function () {
       "disabled",
       !$("#finalApproval").prop("checked")
     );
+  });
+
+  $("#result").on("hidden.bs.modal", function () {
+    location.reload();
   });
 });

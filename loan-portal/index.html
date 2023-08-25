@@ -17,14 +17,13 @@
   </head>
   <body>
     <div class="container">
-      <h1>Loan Application</h1>
+      <h1>Business Loan Application</h1>
       <div>
         <ul class="nav nav-tabs">
-          <li id="hometab" class="active"><a data-toggle="tab" href="#home">Home</a></li>
-          <li id="businesstab" ><a data-toggle="tab" href="#business">Business Details</a></li> 
+          <li id="hometab" class="active"><a data-toggle="tab" href="#home">Application</a></li> 
         </ul>
         <div class="tab-content container">
-          <div id="home" class="tab-pane fade in active">
+          <div id="home">
                <form id="start-application">
                 <div class="form-group">
                   <label for="name">Name:</label>
@@ -42,7 +41,7 @@
               </form>
             </div>
             <!-- business details -->
-            <div id="business" class="tab-pane fade">
+            <div id="business" class="hidden" >
               <form id="submit-application">
                 <div class="form-group">
                   <label for="regId">Business Registration ID:</label>
@@ -90,7 +89,7 @@
                 <div class="form-check hidden"  id="approval">
                   <input class="form-check-input" type="checkbox" value="" id="finalApproval">
                   <label class="form-check-label" for="flexCheckDefault">
-                    I approve the balance sheet and proceed to submit
+                    I reviewd the balance sheet and proceed to submit
                   </label>
                 </div>
                 <div class="text-right">
@@ -98,8 +97,11 @@
                     Submit
                   </button>
                 </div>
-              </form>
-              <div id="outcome"></div>
+              </form> 
+                <div class="modal fade" id="result" role="dialog">
+                  <div class="modal-dialog" id="outcome">
+                  </div>
+                </div>  
             </div> 
           </div>
         </div>
