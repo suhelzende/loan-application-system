@@ -1,5 +1,7 @@
 package router
 
+// Router - routes api to respective controller
+
 import (
 	"fmt"
 	"net/http"
@@ -8,17 +10,19 @@ import (
 	apiconstants "github.com/suhelz/loan-processing-system/constants/api-constants"
 )
 
+// Router to hold Endpoint and gin.Engine
 type Router struct {
 	Endpoint string
 	router   *gin.Engine
 }
 
+// Create new router with healthcheck and CORS handler
 func NewRouter() *Router {
 	r := gin.New()
 
 	r.GET("/", func(ctx *gin.Context) {
 		ctx.JSON(http.StatusOK, gin.H{
-			"Message": "Continer Status: OK",
+			"Message": "Container Status: OK",
 		})
 	})
 
@@ -44,6 +48,7 @@ func NewRouter() *Router {
 	}
 }
 
+// Serve APIs
 func (r Router) Run() error {
 	return r.router.Run(r.Endpoint)
 }

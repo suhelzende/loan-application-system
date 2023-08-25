@@ -12,6 +12,7 @@ import (
 	"github.com/suhelz/loan-processing-system/service"
 )
 
+// ApplicationController - provide all application provider API controller
 type ApplicationController struct {
 	loanApplicationService service.LoanApplicationServiceInterface
 }

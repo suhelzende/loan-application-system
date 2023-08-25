@@ -1,5 +1,7 @@
 package storage
 
+// Mock DB behavior
+
 import (
 	"strings"
 	"time"

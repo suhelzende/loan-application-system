@@ -4,7 +4,8 @@ import (
 	"github.com/suhelz/loan-processing-system/model"
 )
 
-// This package serves as data store for loan-application systems
+// This package serves as mock data store for loan-application systems
+// This mock DB behavior, actual application wont need this application will directly call db query
 
 var loanApplicationsStore map[string]*model.LoanApplication
 var accountingProviderStore map[string]*model.AccountingProvider

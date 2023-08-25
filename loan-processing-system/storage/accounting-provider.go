@@ -1,5 +1,7 @@
 package storage
 
+// Mock DB behavior
+
 import (
 	"github.com/suhelz/loan-processing-system/model"
 )

@@ -23,7 +23,7 @@ type Borrower struct {
 	Email string `json:"email"`
 }
 
-type DicisionEngineRequest struct {
+type DecisionEngineRequest struct {
 	BusinessDetails    BusinessDetailsWithSummary
 	PreAssessmentValue int
 }
@@ -34,8 +34,8 @@ type BusinessDetailsWithSummary struct {
 	ProfitLossSummaryByYear []ProfitLossSummary
 }
 
-func NewDicisionEngineRequest(businessDetails BusinessDetails, profitLossSummary []ProfitLossSummary, preAssessmentValue int) DicisionEngineRequest {
-	return DicisionEngineRequest{
+func NewDecisionEngineRequest(businessDetails BusinessDetails, profitLossSummary []ProfitLossSummary, preAssessmentValue int) DecisionEngineRequest {
+	return DecisionEngineRequest{
 		BusinessDetails: BusinessDetailsWithSummary{
 			Name:                    businessDetails.Name,
 			YearEstablished:         businessDetails.EstablishedYear,

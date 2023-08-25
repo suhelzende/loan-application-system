@@ -6,10 +6,10 @@ type AccountingProvider struct {
 }
 
 type BalenceSheet struct {
-	Sheet []BalenceSheetForMonth
+	Sheet []BalanceSheetForMonth
 }
 
-type BalenceSheetForMonth struct {
+type BalanceSheetForMonth struct {
 	Year         int
 	Month        int
 	ProfitOrLoss int

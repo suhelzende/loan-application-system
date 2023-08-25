@@ -5,6 +5,7 @@ import (
 	"github.com/suhelz/loan-processing-system/controller"
 )
 
+// Adds Application APIs to router
 func (r Router) AddLoanApplicationController(applicationController controller.ApplicationController) {
 	applicationControllerGroup := r.router.Group(apiconstants.EndpointLoanApplicationControllerGroup)
 

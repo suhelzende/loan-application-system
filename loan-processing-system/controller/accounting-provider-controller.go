@@ -10,6 +10,7 @@ import (
 	"github.com/suhelz/loan-processing-system/service"
 )
 
+// AccountingProviderController - provide all supported accounting provider API controller
 type AccountingProviderController struct {
 	accountingProviderService service.AccountProviderServiceInterface
 }

@@ -11,6 +11,7 @@ func CreateNewAccountingProviderService(accountingProvider repository.Accounting
 	}
 }
 
+// AccountingProviderService - it implements AccountProviderServiceInterface behavior
 type AccountingProviderService struct {
 	repository repository.AccountingProviderServiceInterface
 }

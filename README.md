@@ -10,7 +10,7 @@ The system consists of the following:
 The backend would integrate with third-party providers such as:
 
 - Decision engine - This is where the final application will be
-submitted to present the outcome of the application.
+  submitted to present the outcome of the application.
 - Accounting software providers will provide a balance sheet for a selected business of the user.
 
 Below is a sequence diagram to help visually understand the flow.
@@ -92,7 +92,7 @@ sheet = [
 ## Rules to be applied before sending to Decision Engine
 
 - If a business has made a profit in the last 12 months. The final value to be sent with a field `"preAssessment": "60"` which means the Loan is favored to be approved 60% of the requested value.
-If the average asset value across 12 months is greater than the loan amount then `"preAssessment": "100"`
+  If the average asset value across 12 months is greater than the loan amount then `"preAssessment": "100"`
 - Default value to be used `20`
 
 ## The Final output to be sent to the decision engine would contain minimum details such as
@@ -119,3 +119,55 @@ If the average asset value across 12 months is greater than the loan amount then
 ### What is the time-limit on exercise ?
 
 There is none, ensure you submit your best attempt and as soon as you possibly can.
+
+# Solution
+
+### Tech Stack
+
+- Golang REST APIs
+- HTML
+- CSS bootstrtap
+- JQuery
+
+[Click here to see demo recording](https://www.loom.com/share/44c8e463a096402db532a5e8799f4d6f?sid=c57cc034-4b11-4f44-a49d-888e76032b1e)
+
+### Highlights
+
+- SOLID principle followed
+- Builder Design pattern for router - allowing flexibility to add new controller in future
+- Unit test coverage with mocks
+- Simple and Clean code
+- Codebase is organized in a modular, feature centric way - providing extensibility for future changes
+- Loosely coupled dependencies within controller, service and repository
+
+### Build Docker Image
+
+```
+docker build -t loan-application .
+```
+
+### Run Docker Image
+
+```
+docker run -it -p 8090:8090 loan-application
+```
+
+### Run API HealthCheck
+
+```
+curl --request GET \
+  --url http://localhost:8090/ \
+  --header 'User-Agent: Insomnia/2023.5.6'
+```
+
+#### Make sure it return
+
+```
+STATUS:200
+body:
+{
+	"Message": "Container Status: OK"
+}
+```
+
+### Start UI on Live Server in VSCode

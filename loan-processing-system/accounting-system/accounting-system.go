@@ -1,30 +1,101 @@
 package accountingsystem
 
+// This is mock placeholder which acts as Accounting provider for loan-application
 import (
 	"encoding/json"
-	"io/ioutil"
-	"os"
 
 	"github.com/suhelz/loan-processing-system/model"
 )
 
-// From Problem statment it is not clear that Accounting System is third party SDK ot API
-// Also it does not give much details about Accounting System
-// So, this acts as Accounting system mock
-// we can integrate actual accounting system here
-func GetBalenceSheet(businessDetails model.BusinessDetails, accountingProvider model.AccountingProvider) (*model.BalenceSheet, error) {
-	file, err := os.Open("./accounting-system/mock/balencesheet.json")
-	if err != nil {
-		return nil, err
-	}
+const (
+	mockData = `
+	{
+		"sheet": [
+		  {
+			"year": 2020,
+			"month": 12,
+			"profitOrLoss": 250000,
+			"assetsValue": 1234
+		  },
+		  {
+			"year": 2020,
+			"month": 11,
+			"profitOrLoss": 1150,
+			"assetsValue": 5789
+		  },
+		  {
+			"year": 2020,
+			"month": 10,
+			"profitOrLoss": 2500,
+			"assetsValue": 22345
+		  },
+		  {
+			"year": 2020,
+			"month": 9,
+			"profitOrLoss": -187000,
+			"assetsValue": 223452
+		  },
+		  {
+			"year": 2020,
+			"month": 8,
+			"profitOrLoss": 250000,
+			"assetsValue": 1234
+		  },
+		  {
+			"year": 2020,
+			"month": 7,
+			"profitOrLoss": 1150,
+			"assetsValue": 5789
+		  },
+		  {
+			"year": 2020,
+			"month": 6,
+			"profitOrLoss": 2500,
+			"assetsValue": 22345
+		  },
+		  {
+			"year": 2020,
+			"month": 5,
+			"profitOrLoss": -187000,
+			"assetsValue": 223452
+		  },
+		  {
+			"year": 2020,
+			"month": 4,
+			"profitOrLoss": 250000,
+			"assetsValue": 1234
+		  },
+		  {
+			"year": 2020,
+			"month": 3,
+			"profitOrLoss": 1150,
+			"assetsValue": 5789
+		  },
+		  {
+			"year": 2020,
+			"month": 2,
+			"profitOrLoss": 2500,
+			"assetsValue": 22345
+		  },
+		  {
+			"year": 2020,
+			"month": 1,
+			"profitOrLoss": -187000,
+			"assetsValue": 223452
+		  }
+		]
+	  }
+	  
+	`
+)
 
-	byteData, err := ioutil.ReadAll(file)
-	if err != nil {
-		return nil, err
-	}
+// As per the given problem statement, decision engine is third party system
+// So, this acts as decision Engine mock
+// we can integrate decision engine APIs here
+func GetBalanceSheet(businessDetails model.BusinessDetails, accountingProvider model.AccountingProvider) (*model.BalenceSheet, error) {
 
 	sheet := &model.BalenceSheet{}
-	err = json.Unmarshal(byteData, sheet)
+	err := json.Unmarshal([]byte(mockData), sheet)
 	if err != nil {
 		return nil, err
 	}

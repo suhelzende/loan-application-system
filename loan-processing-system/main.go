@@ -12,16 +12,16 @@ import (
 
 func main() {
 
-	// initialize inmemory storage for Application
+	// initialize in memory storage for Application
 	// in actual system it will have db connection here
 	storage.InitStorage()
 
-	// loan application dependancies
+	// loan application dependencies
 	applicationRepository := repository.CreateNewApplicationRepository()
 	applicationService := service.CreateNewApplicationService(applicationRepository)
 	applicationController := controller.NewApplicationController(applicationService)
 
-	// accounting provider dependancies
+	// accounting provider dependencies
 	accountingProviderRepository := repository.CreateNewAccountingProviderRepository()
 	accountingProviderService := service.CreateNewAccountingProviderService(accountingProviderRepository)
 	accountingProvideController := controller.NewAccountingProviderController(accountingProviderService)

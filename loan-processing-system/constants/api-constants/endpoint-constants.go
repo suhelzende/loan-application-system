@@ -1,7 +1,7 @@
 package apiconstants
 
 const (
-	// Application
+	// Application API endpoint
 	EndpointLoanApplicationControllerGroup = "/application"
 
 	EndpointStartLoanApplication = "/start"
@@ -12,12 +12,13 @@ const (
 
 	PathParamApplicationID = "applicationID"
 
-	// Accounting
+	// Accounting API endpoint
 	EndpointAccountingControllerGroup = "/accounting"
 
 	EndpointGetAllAccountingProviders = "/providers"
 
-	EndpointRequestBalenceSheet = "/balencesheet/request"
+	EndpointRequestBalanceSheet = "/balencesheet/request"
 
+	// Default port to start the server
 	DefaultPort = 8090
 )
