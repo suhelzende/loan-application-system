@@ -4,7 +4,7 @@
 
 - Golang REST APIs
 - HTML
-- CSS bootstrtap
+- CSS bootstrap
 - JQuery
 
 [Click here to see demo recording](https://www.loom.com/share/44c8e463a096402db532a5e8799f4d6f?sid=c57cc034-4b11-4f44-a49d-888e76032b1e)
