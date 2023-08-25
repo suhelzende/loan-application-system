@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loan Application</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <link    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css"    rel="stylesheet"  />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="processor/loan-processor.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Business Loan Application</h1>
+      <div>
+        <ul class="nav nav-tabs">
+          <li id="hometab" class="active"><a data-toggle="tab" href="#home">Application</a></li> 
+        </ul>
+        <div class="tab-content container">
+          <div id="home">
+               <form id="start-application">
+                <div class="form-group">
+                  <label for="name">Name:</label>
+                  <input type="name" class="form-control" id="name" />
+                </div>
+                <div class="form-group">
+                  <label for="email">Email:</label>
+                  <input type="email" class="form-control" id="email" />
+                </div>
+                <div class="text-right">
+                  <button type="submit" class="btn btn-default">
+                    Start Application
+                  </button>
+                </div>
+              </form>
+            </div>
+            <!-- business details -->
+            <div id="business" class="hidden" >
+              <form id="submit-application">
+                <div class="form-group">
+                  <label for="regId">Business Registration ID:</label>
+                  <input type="regId" class="form-control" id="regId" />
+                </div>
+                <div class="form-group">
+                  <label for="businessName">Business Name:</label>
+                  <input type="businessName" class="form-control" id="businessName" />
+                </div>
+                <div class="form-group">
+                  <label for="eYear">Established Year:</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="eYear"
+                    id="eYear"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="amount">Loan Amount :</label>
+                  <input type="number" class="form-control" id="amount" />
+                </div>
+                <div class="text-left">
+                  <select class="form-select form-control" aria-label="Default select example" id="providers"> 
+                  </select>
+                </div>
+                <div class="text-right">
+                  <button id="request" class="btn btn-default">
+                    Request Balance Sheet
+                  </button>
+                </div>
+                <div class="hidden" id="balancesheettable">
+                  <label for="businessName">Balance Sheet:</label>
+                <table class="table">
+                  <thead>
+                    <th scope="col">Year</th>
+                    <th scope="col">Month</th>
+                    <th scope="col">Profit/Loss</th>
+                    <th scope="col">Asset Value</th>
+                  </thead>
+                  <tbody id="sheet"></tbody>
+                  </table>
+                  </div>
+                </table>
+                <div class="form-check hidden"  id="approval">
+                  <input class="form-check-input" type="checkbox" value="" id="finalApproval">
+                  <label class="form-check-label" for="flexCheckDefault">
+                    I reviewd the balance sheet and proceed to submit
+                  </label>
+                </div>
+                <div class="text-right">
+                  <button id="submitapplication" type="submit" class="btn btn-default" disabled>
+                    Submit
+                  </button>
+                </div>
+              </form> 
+                <div class="modal fade" id="result" role="dialog">
+                  <div class="modal-dialog" id="outcome">
+                  </div>
+                </div>  
+            </div> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </body> 
+</html>
