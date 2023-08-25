@@ -1,3 +1,55 @@
+# Solution
+
+### Tech Stack
+
+- Golang REST APIs
+- HTML
+- CSS bootstrtap
+- JQuery
+
+[Click here to see demo recording](https://www.loom.com/share/44c8e463a096402db532a5e8799f4d6f?sid=c57cc034-4b11-4f44-a49d-888e76032b1e)
+
+### Highlights
+
+- SOLID principle followed
+- Builder Design pattern for router - allowing flexibility to add new controller in future
+- Unit test coverage with mocks
+- Simple and Clean code
+- Codebase is organized in a modular, feature centric way - providing extensibility for future changes
+- Loosely coupled dependencies within controller, service and repository
+
+### Build Docker Image
+
+```
+docker build -t loan-application .
+```
+
+### Run Docker Image
+
+```
+docker run -it -p 8090:8090 loan-application
+```
+
+### Run API HealthCheck
+
+```
+curl --request GET \
+  --url http://localhost:8090/ \
+  --header 'User-Agent: Insomnia/2023.5.6'
+```
+
+#### Make sure it return
+
+```
+STATUS:200
+body:
+{
+	"Message": "Container Status: OK"
+}
+```
+
+### Start UI on Live Server in VSCode
+
 # Exercise
 
 The goal of the project is to build a simple business loan application system.
@@ -119,55 +171,3 @@ sheet = [
 ### What is the time-limit on exercise ?
 
 There is none, ensure you submit your best attempt and as soon as you possibly can.
-
-# Solution
-
-### Tech Stack
-
-- Golang REST APIs
-- HTML
-- CSS bootstrtap
-- JQuery
-
-[Click here to see demo recording](https://www.loom.com/share/44c8e463a096402db532a5e8799f4d6f?sid=c57cc034-4b11-4f44-a49d-888e76032b1e)
-
-### Highlights
-
-- SOLID principle followed
-- Builder Design pattern for router - allowing flexibility to add new controller in future
-- Unit test coverage with mocks
-- Simple and Clean code
-- Codebase is organized in a modular, feature centric way - providing extensibility for future changes
-- Loosely coupled dependencies within controller, service and repository
-
-### Build Docker Image
-
-```
-docker build -t loan-application .
-```
-
-### Run Docker Image
-
-```
-docker run -it -p 8090:8090 loan-application
-```
-
-### Run API HealthCheck
-
-```
-curl --request GET \
-  --url http://localhost:8090/ \
-  --header 'User-Agent: Insomnia/2023.5.6'
-```
-
-#### Make sure it return
-
-```
-STATUS:200
-body:
-{
-	"Message": "Container Status: OK"
-}
-```
-
-### Start UI on Live Server in VSCode
